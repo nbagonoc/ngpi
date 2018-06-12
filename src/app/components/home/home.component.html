@@ -1,22 +1,40 @@
 <div class="container">
   <div class="col-md-6 mx-auto">
-    <div class="card my-3">
-      <div class="card-body text-center">
-        <h1>
+    <div class="card my-3 shadow">
+      <div class="card-body">
+        <h1 class="text-center">
           Users API
         </h1>
-        <p class="text-muted mb-2">Thank you, http://jsonplaceholder.typicode.com/ for the API</p>
+        <p class="text-muted text-center mb-2">Thank you, http://jsonplaceholder.typicode.com/ for the API</p>
+        <form (submit)="onSubmit(isEdit)">
+          <div class="form-group">
+            <label for="">Name</label>
+            <input type="text" class="form-control" [(ngModel)]="user.name" name="name" placeholder="Enter name">
+          </div>
+          <div class="form-group">
+            <label for="">Email</label>
+            <input type="text" class="form-control" [(ngModel)]="user.email" name="email" placeholder="Enter email">
+          </div>
+          <div class="form-group">
+            <label for="">Phone</label>
+            <input type="text" class="form-control" [(ngModel)]="user.phone" name="phone" placeholder="Enter phone number">
+          </div>
+          <input type="submit" class="btn btn-outline-success mr-1" value="Submit" />
+          <button type="button" class="btn btn-outline-secondary" (click)="onClear()">
+            Clear
+          </button>
+        </form>
       </div>
     </div>
-    <div *ngFor="let user of users" class="card mb-3">
+    <div *ngFor="let user of users" class="card mb-3 shadow">
       <div class="card-body">
         <ul class="list-group-flush px-0 my-0">
           <li class="list-group-item">
             <h5 class="mb-0">{{user.name}}</h5>
           </li>
-          <li class="list-group-item text-muted">
+          <!-- <li class="list-group-item text-muted">
             {{user.address.suite}}, {{user.address.street}}, {{user.address.city}},
-          </li>
+          </li> -->
           <li class="list-group-item text-muted">
             {{user.email}}
           </li>
@@ -24,6 +42,10 @@
             {{user.phone}}
           </li>
         </ul>
+        <div class="float-right">
+          <button (click)="onEdit(user)" class="btn btn-outline-secondary btn-sm mt-2 mr-1">Edit</button>
+          <button (click)="onDelete(user.id)" class="btn btn-outline-danger btn-sm mt-2">Delete</button>
+        </div>
       </div>
     </div>
   </div>
